@@ -1,28 +1,20 @@
+import os
 from setuptools import setup
-import re
 
+from setup_utils.utils import VersionFinder, LongDescriptionFinder
 
-class VersionException(Exception):
-    def __init__(self):
-        super().__init__('Version not defined')
+version = VersionFinder().find_version()
 
-
-version = None
-for line in open('./ml_flow/__init__.py'):  # decoupling modules from setup, instead of importing here
-    match = re.fullmatch(r"__version__ *= *('.*')", line)
-
-    if match:
-        version, = match.groups()
-        break
-
-if not version:
-    raise VersionException
+long_desc = ''
+with LongDescriptionFinder() as ld:
+    long_desc = ld.get_desc_from_readme()
 
 setup(
     name='ml-flow',
     version=version[1:-1],
     description='An Iterative Applied Machine Learning Framework',
-    url='saranshk.com',  # TODO: replace it with GitHub uri
+    long_description=long_desc,
+    url='https://github.com/Saransh-git/ml-flow.git',
     author='Saransh Kumar',
     author_email='kumar.saransh@gmail.com',
     classifiers=[
