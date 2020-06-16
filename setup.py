@@ -1,4 +1,3 @@
-import os
 from setuptools import setup
 
 from setup_utils.utils import VersionFinder, LongDescriptionFinder

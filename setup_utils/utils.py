@@ -11,7 +11,7 @@ class VersionFinder:
         try:
             with open(self.version_file_path) as f:
                 for line in f:  # decoupling modules from setup, instead of importing here
-                    match = re.fullmatch(r"__version__ *= *('.*')", line)
+                    match = re.fullmatch(r"__version__ *= *('.*')[\r\n]*", line)
 
                     if match:
                         self.version, = match.groups()
